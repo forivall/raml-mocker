@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 var ramlMocker = require('../src/index.js');
-ramlMocker.generate();
+// ramlMocker.generate();
 ramlMocker.generate({
     path: 'test/raml',
     formats: {
@@ -9,7 +9,8 @@ ramlMocker.generate({
             return 'BAR';
         }
     }
-}, function (methods) {
+}, function (err, methods) {
+    if (err) return console.log(err.stack || err);
     console.log(methods);
     _.each(methods, function (m) {
         var mock = m.mock();
